@@ -9,12 +9,20 @@
         <tbody>
           <tr>
             <td><%= image_tag @user.get_profile_image(100, 100) %><br>
-                <%= link_to @book.user.name, user_path %>
+                <%= link_to @books.user.name, user_path %>
             </td>
-            <td><%= link_to @book.title, book_path %></td>
-            <td><%= @book.body %></td>
-            <td><%= link_to "Edit", edit_book_path(params[:id]), class: "btn btn-success"  %></td>
-            <td><%= link_to "Destroy", book_path(params[:id]), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger"  %></td>
+            <td><%= link_to @books.title, book_path %></td>
+            <td><%= @books.body %></td>
+            <td>
+                <% if @books.user_id == current_user.id %>
+                  <%= link_to "Edit", edit_book_path(params[:id]), class: "btn btn-success"  %>
+                <% end %>
+            </td>
+            <td>
+                <% if @books.user_id == current_user.id %>
+                  <%= link_to "Destroy", book_path(params[:id]), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger"  %>
+                <% end %>
+            </td>
           </tr>
         </tbody>
       </table>
